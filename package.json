@@ -1,6 +1,6 @@
 {
   "name": "ace3docparser",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Parse ACE3 function headers with node.js",
   "main": "app.js",
   "scripts": {
