@@ -5,6 +5,7 @@ var models = require("./models");
 var parser = require("./parser");
 var fsHelper = require("./fsHelper");
 var htmlHelper = require("./htmlHelper");
+var self = this;
 function parseFunctionFile(file) {
     var data = fs.readFileSync(file, "utf8");
     if (!data || data === "") {
@@ -27,7 +28,10 @@ function parseFunctionFiles(dir, callback) {
         }
         var allFunctions = [];
         results.forEach(function (file) {
-            allFunctions.push(this.parseFunctionFile(file));
+            var doc = self.parseFunctionFile(file);
+            if (doc) {
+                allFunctions.push(doc);
+            }
         });
         allFunctions = allFunctions.sort(function (a, b) {
             if (a.Path < b.Path) {
@@ -43,7 +47,7 @@ function parseFunctionFiles(dir, callback) {
 }
 exports.parseFunctionFiles = parseFunctionFiles;
 function createFunctionDocumentationFile(dir, type, outputFile) {
-    this.parseFunctionFiles(dir, function (err, allFunctions) {
+    self.parseFunctionFiles(dir, function (err, allFunctions) {
         if (type === "html") {
             htmlHelper.saveDocsToHtmlFile(allFunctions, dir, outputFile);
         }

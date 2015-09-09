@@ -1,7 +1,7 @@
 {
   "name": "ace3docparser",
-  "version": "1.0.1",
-  "description": "Parse ACE3 function headers with node.js",
+  "version": "1.0.2",
+  "description": "Parse ACE3 function headers",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

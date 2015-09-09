@@ -7,6 +7,8 @@ import parser = require("./parser");
 import fsHelper = require("./fsHelper");
 import htmlHelper = require("./htmlHelper");
 
+var self = this;
+
 export function parseFunctionFile(file: string): models.FunctionDoc {
 
     var data: string = fs.readFileSync(file, "utf8");
@@ -38,7 +40,10 @@ export function parseFunctionFiles(dir: string, callback: (err: NodeJS.ErrnoExce
         var allFunctions: Array<models.FunctionDoc> = [];
 
         results.forEach(function(file) {
-            allFunctions.push(this.parseFunctionFile(file));
+            var doc: models.FunctionDoc = self.parseFunctionFile(file);
+            if (doc) {
+                allFunctions.push(doc);
+            }
         });
 
         allFunctions = allFunctions.sort(function(a: models.FunctionDoc, b: models.FunctionDoc) {
@@ -57,7 +62,7 @@ export function parseFunctionFiles(dir: string, callback: (err: NodeJS.ErrnoExce
 }
 
 export function createFunctionDocumentationFile(dir: string, type: string, outputFile: string) {
-    this.parseFunctionFiles(dir, function(err, allFunctions) {
+    self.parseFunctionFiles(dir, function(err, allFunctions) {
         if (type === "html") {
             htmlHelper.saveDocsToHtmlFile(allFunctions, dir, outputFile)
         }
