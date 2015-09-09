@@ -1,5 +1,4 @@
 "use strict";
-
 export class FunctionDoc {
 
     private name: string;

@@ -1,0 +1,24 @@
+{
+  "name": "ace3docparser",
+  "version": "1.0.0",
+  "description": "Parse ACE3 function headers with node.js",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bux578/ACE3Doc.git"
+  },
+  "keywords": [
+    "ace3",
+    "documentation",
+    "header"
+  ],
+  "author": "bux578 <github@jonathandavid.de> (https://github.com/bux578)",
+  "license": "GPL-2.0",
+  "bugs": {
+    "url": "https://github.com/bux578/ACE3Doc/issues"
+  },
+  "homepage": "https://github.com/bux578/ACE3Doc#readme"
+}
