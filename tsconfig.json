@@ -24,7 +24,6 @@
         "./fsHelper.ts",
         "./htmlHelper.ts",
         "./models.ts",
-        "./old.ts",
         "./parser.ts",
         "./refs/node.d.ts"
     ]

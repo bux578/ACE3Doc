@@ -2,6 +2,18 @@
 "use strict";
 var fs = require("fs");
 var path = require("path");
+function extractModule(file) {
+    var pathObj = path.parse(file);
+    if (pathObj && pathObj.dir && pathObj.dir.length > 0) {
+        var arrPaths = pathObj.dir.split(path.sep);
+        var addonsIndex = arrPaths.indexOf("addons");
+        if (arrPaths.length - 1 >= addonsIndex + 1) {
+            return arrPaths[addonsIndex + 1];
+        }
+        return null;
+    }
+}
+exports.extractModule = extractModule;
 function walk(dir, extensions, callback) {
     var results = [];
     fs.readdir(dir, function (err, list) {

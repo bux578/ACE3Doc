@@ -25,6 +25,16 @@ var FunctionDoc = (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(FunctionDoc.prototype, "Module", {
+        get: function () {
+            return this.module;
+        },
+        set: function (value) {
+            this.module = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(FunctionDoc.prototype, "Description", {
         get: function () {
             return this.description;

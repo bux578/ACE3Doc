@@ -25,6 +25,8 @@ export function parseFunctionFile(file: string): models.FunctionDoc {
     var doc: models.FunctionDoc = new models.FunctionDoc(path.basename(file));
 
     doc.Path = file;
+    var module = fsHelper.extractModule(file);
+    doc.Module = module.replace("-", " ").replace("_", " ");
     doc = parser.parseHeader(headerLines, doc);
 
     return doc;

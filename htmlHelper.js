@@ -2,11 +2,20 @@
 var fs = require("fs");
 function saveDocsToHtmlFile(docs, dir, outputFile) {
     var html = "";
-    docs.forEach(function (item) {
+    var allModules = [];
+    docs.forEach(function (item, index) {
         var output = "";
+        if (allModules.indexOf(item.Module) === -1) {
+            allModules.push(item.Module);
+            if (index !== 1) {
+                output += "</section>";
+            }
+            output += "<section id=\"" + escapeHtml(item.Module).replace(" ", "") + "\">";
+            output += "<h2>" + escapeHtml(item.Module) + "</h2>\n";
+        }
         var url = item.Path.replace(dir, "https://github.com/acemod/ACE3/tree/master/addons").replace("\\", "/");
-        output += "<div>";
-        output += "<h2 id=\"" + escapeHtml(item.Name) + "\"><a href=\"" + url + "\">" + escapeHtml(item.Name) + "</a></h2>\n";
+        output += "<article>";
+        output += "<h3 id=\"" + escapeHtml(item.Name).replace(" ", "") + "\"><a href=\"" + url + "\">" + escapeHtml(item.Name) + "</a></h3>\n";
         output += "<small>" + escapeHtml(item.Path) + "</small>\n";
         output += "<p><em>" + escapeHtml(item.Description) + "</em></p>" + "\n";
         output += "<p><b>Author:</b> " + escapeHtml(item.Author) + "</p>" + "\n";
@@ -30,10 +39,21 @@ function saveDocsToHtmlFile(docs, dir, outputFile) {
         if (item.IsPublic === true || item.IsPublic === false) {
             output += "<p><b>Public:</b> " + item.IsPublic + "</p>" + "\n";
         }
-        output += "</div>";
+        output += "</article>";
+        output += "\n";
         html += output;
-        html += "\n<hr/>\n";
     });
+    var moduleToc = "<div><ul>";
+    allModules.forEach(function (item) {
+        var moduleOutput = "<li>";
+        moduleOutput += '<a href="#' + escapeHtml(item).replace(" ", "") + '">';
+        moduleOutput += item;
+        moduleOutput += "</a>";
+        moduleOutput += "</li>";
+        moduleToc += moduleOutput;
+    });
+    moduleToc += "</ul></div>";
+    html = moduleToc + html;
     fs.writeFile(outputFile, html, function (err, file) {
         if (err) {
             throw err;

@@ -3,6 +3,7 @@ export class FunctionDoc {
 
     private name: string;
     private path: string;
+    private module: string;
     private description: string;
     private author: string;
     private args: Array<string> = [];
@@ -25,6 +26,12 @@ export class FunctionDoc {
     }
     set Path(value: string) {
         this.path = value;
+    }
+    get Module(): string {
+        return this.module;
+    }
+    set Module(value: string) {
+        this.module = value;
     }
     get Description(): string {
         return this.description;
