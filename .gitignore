@@ -1,3 +1,5 @@
 doc.html
 .idea
 node_modules
+.baseDir.*
+.tscache

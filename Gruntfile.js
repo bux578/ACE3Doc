@@ -1,4 +1,3 @@
-
 module.exports = function (grunt) {
     "use strict";
 
@@ -6,43 +5,26 @@ module.exports = function (grunt) {
     // Project configuration.
     grunt.initConfig({
 
-        typescript: {
-            base: {
-                src: ["./src/**/*.ts"],
-                dest: "./lib",
+        ts: {
+            default: {
+                src: ["src/**/*.ts", "!src/refs/**/*.ts"],
+                outDir: "./lib",
+                watch: "src/",
                 options: {
-                    module: "commonjs", //or commonjs
-                    target: "es5", //or es3
+                    module: "commonjs",
                     sourceMap: false,
-                    declaration: false
+                    target: "es5"
                 }
-            }
-        },
-        watch: {
-            typescript: {
-                files: "./src/**/*.ts",
-                tasks: ["typescript"],
-                options: {
-                    spawn: false,
-                    interrupt: true
-                }
+
             }
         }
 
     });
 
-    grunt.loadNpmTasks("grunt-typescript");
-    grunt.loadNpmTasks("grunt-contrib-watch");
-
-    // avoid conflicts
-    //grunt.renameTask("watch", "fsWatch");
-    grunt.registerTask("watch", [
-        "typescript",
-        "watch"
-    ]);
+    grunt.loadNpmTasks("grunt-ts");
 
     // Default task.
     grunt.registerTask("default", [
-        "typescript"
+        "ts"
     ]);
 };
